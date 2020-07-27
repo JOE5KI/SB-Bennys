@@ -3,9 +3,19 @@
 local bennyLocationTuner = vector3(1174.73, 2640, 37.76)
 local bennyLocationImport = vector3(936.62, -970.79, 39.05)
 local bennyLocation = vector3(-211.55, -1324.55, 30.90)
+local bennyPaletoLocation = vector3(110.02, 6627.14, 30.79)
+local bennyMirrorLocation = vector3(1138.99, -774.81, 55.98)
+local bennyCarcerLocation = vector3(-335.2, -136.9, 38.01)
+local bennySandyLocation = vector3(2007.91, 3799.57, 31.18)
+local bennyAirportLocation = vector3(-1157.25, -2010.57, 12.18)
 
 local bennyHeading = 319.73135375977
-
+local bennyPaletoHeading = 224.78
+local bennyMirrorHeading = 1.16
+local bennyCarcerHeading = 88.09
+local bennyTunerHeading = 1.57
+local bennySandyHeading = 298.24
+local bennyAirportHeading = 330.7
 
 
 
@@ -92,7 +102,12 @@ Citizen.CreateThread(function()
 
 	        nearDefault = #(plyPos - bennyLocation)
 	        nearImport = #(plyPos - bennyLocationImport)
-	        nearTuner = #(plyPos - bennyLocationTuner)
+			nearTuner = #(plyPos - bennyLocationTuner)
+			nearPaleto = #(plyPos - bennyPaletoLocation)
+			nearMirror = #(plyPos - bennyMirrorLocation)
+			nearCarcer = #(plyPos - bennyCarcerLocation)
+			nearSandy = #(plyPos - bennySandyLocation)
+			nearAirport = #(plyPos - bennyAirportLocation)
 
 
             if nearDefault <=5 then
@@ -126,12 +141,62 @@ Citizen.CreateThread(function()
                    disableControls()
                 end
                 sleep = 5
+			end
+			
+			if nearPaleto <=5 then
+                if not isPlyInBennys then
+                    Draw3DText(bennyPaletoLocation.x, bennyPaletoLocation.y, bennyPaletoLocation.z + 1.2, "[Press ~p~E~w~ - Enter Paleto Shop]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
+                    DrawMarker(21, bennyPaletoLocation.x, bennyPaletoLocation.y, bennyPaletoLocation.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                else
+                    disableControls()
+                end
+                sleep = 5
+			end
+			
+			if nearMirror <=5 then
+                if not isPlyInBennys then
+                    Draw3DText(bennyMirrorLocation.x, bennyMirrorLocation.y, bennyMirrorLocation.z + 1.2, "[Press ~p~E~w~ - Enter Mirror Park Shop]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
+                    DrawMarker(21, bennyMirrorLocation.x, bennyMirrorLocation.y, bennyMirrorLocation.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                else
+                    disableControls()
+                end
+                sleep = 5
+			end
+			
+			if nearCarcer <=5 then
+                if not isPlyInBennys then
+                    Draw3DText(bennyCarcerLocation.x, bennyCarcerLocation.y, bennyCarcerLocation.z + 1.2, "[Press ~p~E~w~ - Enter Carcer Way Shop]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
+                    DrawMarker(21, bennyCarcerLocation.x, bennyCarcerLocation.y, bennyCarcerLocation.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                else
+                    disableControls()
+                end
+                sleep = 5
+			end
+			
+			
+			if nearSandy <=5 then
+                if not isPlyInBennys then
+                    Draw3DText(bennySandyLocation.x, bennySandyLocation.y, bennySandyLocation.z + 1.2, "[Press ~p~E~w~ - Enter Sandy Customs]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
+                    DrawMarker(21, bennySandyLocation.x, bennySandyLocation.y, bennySandyLocation.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                else
+                    disableControls()
+                end
+                sleep = 5
+			end
+			
+			if nearAirport <=5 then
+                if not isPlyInBennys then
+                    Draw3DText(bennyAirportLocation.x, bennyAirportLocation.y, bennyAirportLocation.z + 1.2, "[Press ~p~E~w~ - Enter Airport Customs]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
+                    DrawMarker(21, bennyAirportLocation.x, bennyAirportLocation.y, bennyAirportLocation.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                else
+                    disableControls()
+                end
+                sleep = 5
             end
         end
         Citizen.Wait(sleep)
     end
 end)
-
 
 
 
@@ -148,9 +213,78 @@ function enterLocation(locationsPos)
     SetEntityCollision(plyVeh, false, true)
 end
 
+function enterPaletoLocation(locationsPos)
+    local plyPed = GetPlayerPed(-1)
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    SetEntityCoords(plyVeh, locationsPos)
+    SetEntityHeading(plyVeh, bennyPaletoHeading)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+end
+
+function enterMirrorLocation(locationsPos)
+    local plyPed = GetPlayerPed(-1)
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    SetEntityCoords(plyVeh, locationsPos)
+    SetEntityHeading(plyVeh, bennyMirrorHeading)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+end
+
+function enterCarcerLocation(locationsPos)
+    local plyPed = GetPlayerPed(-1)
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    SetEntityCoords(plyVeh, locationsPos)
+    SetEntityHeading(plyVeh, bennyCarcerHeading)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+end
 
 
+function enterTunerLocation(locationsPos)
+    local plyPed = GetPlayerPed(-1)
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
 
+    SetVehicleModKit(plyVeh, 0)
+    SetEntityCoords(plyVeh, locationsPos)
+    SetEntityHeading(plyVeh, bennyTunerHeading)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+end
+
+function enterSandyLocation(locationsPos)
+    local plyPed = GetPlayerPed(-1)
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    SetEntityCoords(plyVeh, locationsPos)
+    SetEntityHeading(plyVeh, bennySandyHeading)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+end
+
+function enterAirportLocation(locationsPos)
+    local plyPed = GetPlayerPed(-1)
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    SetEntityCoords(plyVeh, locationsPos)
+    SetEntityHeading(plyVeh, bennyAirportHeading)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+end
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -675,7 +809,12 @@ Citizen.CreateThread(function()
 
 			nearDefault = #(plyPos - bennyLocation)
 	        nearImport = #(plyPos - bennyLocationImport)
-	        nearTuner = #(plyPos - bennyLocationTuner)
+			nearTuner = #(plyPos - bennyLocationTuner)
+			nearPaleto = #(plyPos - bennyPaletoLocation)
+			nearMirror = #(plyPos - bennyMirrorLocation)
+			nearCarcer = #(plyPos - bennyCarcerLocation)
+			nearSandy = #(plyPos - bennySandyLocation)
+			nearAirport = #(plyPos - bennyAirportLocation)
 
 			if nearDefault <= 2 then
 			    if IsControlJustReleased(0, 38) then
@@ -687,7 +826,7 @@ Citizen.CreateThread(function()
 			 
 			if nearTuner <= 2 then
 			    if IsControlJustReleased(0, 38) then
-					enterLocation(bennyLocationTuner)
+					enterTunerLocation(bennyLocationTuner)
 					DriveInGarage(6)
 			    end
 			    sleep = 5
@@ -696,6 +835,46 @@ Citizen.CreateThread(function()
 			if nearImport <= 2 then
 			    if IsControlJustReleased(0, 38) then
 					enterLocation(bennyLocationImport)
+					DriveInGarage(6)
+			    end
+			    sleep = 5
+			end
+
+			if nearPaleto <= 2 then
+			    if IsControlJustReleased(0, 38) then
+					enterPaletoLocation(bennyPaletoLocation)
+					DriveInGarage(6)
+			    end
+			    sleep = 5
+			end
+
+			if nearMirror <= 2 then
+			    if IsControlJustReleased(0, 38) then
+					enterMirrorLocation(bennyMirrorLocation)
+					DriveInGarage(6)
+			    end
+			    sleep = 5
+			end
+
+			if nearCarcer <= 2 then
+			    if IsControlJustReleased(0, 38) then
+					enterCarcerLocation(bennyCarcerLocation)
+					DriveInGarage(6)
+			    end
+			    sleep = 5
+			end
+
+			if nearSandy <= 2 then
+			    if IsControlJustReleased(0, 38) then
+					enterSandyLocation(bennySandyLocation)
+					DriveInGarage(6)
+			    end
+			    sleep = 5
+			end
+
+			if nearAirport <= 2 then
+			    if IsControlJustReleased(0, 38) then
+					enterAirportLocation(bennyAirportLocation)
 					DriveInGarage(6)
 			    end
 			    sleep = 5
@@ -1258,7 +1437,7 @@ local Ibuttons = nil
 --Set up scaleform
 function SetIbuttons(buttons, layout)
 	Citizen.CreateThread(function()
-		if not HasScaleformMovieLoaded(Ibuttons) then
+		--[[if not HasScaleformMovieLoaded(Ibuttons) then
 			Ibuttons = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
 			while not HasScaleformMovieLoaded(Ibuttons) do
 				Citizen.Wait(0)
@@ -1268,7 +1447,7 @@ function SetIbuttons(buttons, layout)
 			while not HasScaleformMovieLoaded(Ibuttons) do
 				Citizen.Wait(0)
 			end
-		end
+		end]]
 		local sf = Ibuttons
 		local w,h = GetScreenResolution()
 		PushScaleformMovieFunction(sf,"CLEAR_ALL")
