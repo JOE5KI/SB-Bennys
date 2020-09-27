@@ -1259,7 +1259,7 @@ local Ibuttons = nil
 --Set up scaleform
 function SetIbuttons(buttons, layout)
 	Citizen.CreateThread(function()
-		if not HasScaleformMovieLoaded(Ibuttons) then
+		--[[ if not HasScaleformMovieLoaded(Ibuttons) then
 			Ibuttons = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
 			while not HasScaleformMovieLoaded(Ibuttons) do
 				Citizen.Wait(0)
@@ -1269,7 +1269,7 @@ function SetIbuttons(buttons, layout)
 			while not HasScaleformMovieLoaded(Ibuttons) do
 				Citizen.Wait(0)
 			end
-		end
+		end ]]
 		local sf = Ibuttons
 		local w,h = GetScreenResolution()
 		PushScaleformMovieFunction(sf,"CLEAR_ALL")
