@@ -717,6 +717,7 @@ function LSCMenu:OnMenuClose(m)
 	isPlyInBennys = false
 	SetEntityCollision(plyVeh, true, true)
 	-- DriveOutOfGarage(currentpos.outside)
+	DisplayRadar(true)
 end
 
 function LSCMenu:onSelectedIndexChanged(name, button)
