@@ -1,7 +1,7 @@
 
 local colors = {
 {name = "Black", colorindex = 0},{name = "Carbon Black", colorindex = 147},
-{name = "Hraphite", colorindex = 1},{name = "Anhracite Black", colorindex = 11},
+{name = "Graphite", colorindex = 1},{name = "Anthracite Black", colorindex = 11},
 {name = "Black Steel", colorindex = 2},{name = "Dark Steel", colorindex = 3},
 {name = "Silver", colorindex = 4},{name = "Bluish Silver", colorindex = 5},
 {name = "Rolled Steel", colorindex = 6},{name = "Shadow Silver", colorindex = 7},
@@ -144,6 +144,12 @@ LSC_Config.prices = {
 		price = 250
 	},
 
+------Pearlescent------
+	pearlescent = {
+		colors = colors,
+		price = 250
+	},
+
 ------Neon layout------
 	neonlayout = {
 		{name = "Front,Back and Sides", price = 500},
@@ -181,7 +187,7 @@ LSC_Config.prices = {
 		{ name = "Custom Tires", price = 1500},
 		{ name = "White Tire Smoke",smokecolor = {254,254,254}, price = 1500},
 		{ name = "Black Tire Smoke", smokecolor = {1,1,1}, price = 1500},
-		{ name = "BLue Tire Smoke", smokecolor = {0,150,255}, price = 1500},
+		{ name = "Blue Tire Smoke", smokecolor = {0,150,255}, price = 1500},
 		{ name = "Yellow Tire Smoke", smokecolor = {255,255,50}, price = 1500},
 		{ name = "Orange Tire Smoke", smokecolor = {255,153,51}, price = 1500},
 		{ name = "Red Tire Smoke", smokecolor = {255,10,10}, price = 1500},
@@ -624,6 +630,7 @@ LSC_Config.prices = {
 		{name = "EMS Upgrade, Level 2", mod = 0, price = 15000},
 		{name = "EMS Upgrade, Level 3", mod = 1, price = 30000},
 		{name = "EMS Upgrade, Level 4", mod = 2, price = 45000},
+		{name = "EMS Upgrade, Level 5", mod = 3, price = 60000},
 	},
 	
 -------------Roof----------

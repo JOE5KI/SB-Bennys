@@ -1,13 +1,10 @@
 
 
-local bennyLocationTuner = vector3(1174.73, 2640, 37.76)
-local bennyLocationImport = vector3(936.62, -970.79, 39.05)
-local bennyLocation = vector3(-211.55, -1324.55, 30.90)
+local bennyLocationTuner = vector3(1174.73, 2640, 37.76 - 1.7)
+local bennyLocationImport = vector3(936.62, -970.79, 39.05 - 1.7)
+local bennyLocation = vector3(-211.55, -1324.55, 30.90 - 1.7)
 
 local bennyHeading = 319.73135375977
-
-
-
 
 function disableControls()
     DisableControlAction(1, 172, true) --Key: Up Arrow
@@ -98,7 +95,7 @@ Citizen.CreateThread(function()
             if nearDefault <=5 then
                 if not isPlyInBennys then
                     Draw3DText(bennyLocation.x, bennyLocation.y, bennyLocation.z + 0.5, "[Press ~p~E~w~ - Enter Benny's Motorworks]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
-                    DrawMarker(21, bennyLocation.x, bennyLocation.y, bennyLocation.z + 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                    DrawMarker(1, bennyLocation.x, bennyLocation.y, bennyLocation.z + 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 1.0, 148, 0, 211, 100, false, false, 2, true, nil, nil, false)
                 else
                     disableControls()
                 end
@@ -109,7 +106,7 @@ Citizen.CreateThread(function()
             if nearImport <=5 then
                 if not isPlyInBennys then
                     Draw3DText(bennyLocationImport.x, bennyLocationImport.y, bennyLocationImport.z + 1.2, "[Press ~p~E~w~ - Enter Import Shop]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
-                    DrawMarker(21, bennyLocationImport.x, bennyLocationImport.y, bennyLocationImport.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                    DrawMarker(1, bennyLocationImport.x, bennyLocationImport.y, bennyLocationImport.z + 1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 1.0, 148, 0, 211, 100, false, false, 2, true, nil, nil, false)
                 else
                     disableControls()
                 end
@@ -121,7 +118,7 @@ Citizen.CreateThread(function()
             if nearTuner <=5 then
                 if not isPlyInBennys then
                     Draw3DText(bennyLocationTuner.x, bennyLocationTuner.y, bennyLocationTuner.z + 0.5, "[Press ~p~E~w~ - Enter Harmony Shop]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
-                    DrawMarker(21, bennyLocationTuner.x, bennyLocationTuner.y, bennyLocationTuner.z + 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                    DrawMarker(1, bennyLocationTuner.x, bennyLocationTuner.y, bennyLocationTuner.z + 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 1.0, 148, 0, 211, 100, false, false, 2, true, nil, nil, false)
                 else
                    disableControls()
                 end
@@ -299,6 +296,7 @@ local function DriveInGarage()
 			LSCMenu:setTitle("Benny's Motorworks")
 			LSCMenu.title_sprite = "shopui_title_supermod"
 		end
+		--shopui_title_jokersgarage
 		
 		-------------------------------Load some settings-----------------------------------
 		
@@ -353,7 +351,7 @@ local function DriveInGarage()
 		local maxvehhp = 1000
 		local damage = 0
 		local cunt = GetVehicleBodyHealth(veh)
-		local repairCost = math.ceil(1050 - cunt)
+		local repairCost = math.ceil(3000 - cunt)
 		LSCMenu:addPurchase("Repair vehicle",repairCost, "Full body repair and engine service.")
 		
 		--Setup table for vehicle with all mods, colors etc.
@@ -411,18 +409,23 @@ local function DriveInGarage()
 		end
 		
 		AddMod(0,LSCMenu.categories,"SPOILER", "Spoiler", "Increase downforce.",true)
+
+		if bumper then
+			LSCMenu.categories:addSubMenu("BUMPERS", "Bumpers", "Custom front and rear bumpers.",true)
+			if fbumper then
+				AddMod(1,LSCMenu.categories.Bumpers,"FRONT BUMPERS", "Front bumpers", "Custom front bumpers.",true)
+			end
+			if rbumper then
+				AddMod(2,LSCMenu.categories.Bumpers,"REAR BUMPERS", "Rear bumpers", "Custom rear bumpers.",true)
+			end
+		end
+
 		AddMod(3,LSCMenu.categories,"SKIRTS", "Skirts", "Enhance your vehicle's look with custom side skirts.",true)
-		AddMod(4,LSCMenu.categories,"EXHAUST", "Exhausts", "Customized sports exhausts.",true)
 		AddMod(6,LSCMenu.categories,"GRILLE", "Grille", "Improved engine cooling.",true)
 		AddMod(7,LSCMenu.categories,"HOOD", "Hood", "Enhance car engine cooling.",true)
 		AddMod(8,LSCMenu.categories,"FENDERS", "Fenders", "Enhance body paneling with custom fenders.",true)
 		AddMod(10,LSCMenu.categories,"ROOF", "Roof", "Lower your center of gravity with lightweight roof panels.",true)
-		AddMod(12,LSCMenu.categories,"BRAKES", "Brakes", "Increase stopping power and eliminate brake fade.",true)
-		AddMod(13,LSCMenu.categories,"TRANSMISSION", "Transmission", "Improved acceleration with close ratio transmission.",true)
-		AddMod(14,LSCMenu.categories,"HORN", "Horn", "Custom air horns.",true)
-		AddMod(15,LSCMenu.categories,"SUSPENSION","Suspension","Upgrade to a sports oriented suspension setup.",true)
-		AddMod(18, LSCMenu.categories, "TURBO", "Turbo", "Reduced lag turbocharger.",false)
-		
+
 		if chassis then
 			LSCMenu.categories:addSubMenu("CHASSIS", "Chassis",nil, true)
 			AddMod(42, LSCMenu.categories.Chassis, "ARCH COVER", "Arch cover", "",true) --headlight trim
@@ -432,13 +435,7 @@ local function DriveInGarage()
 			AddMod(46, LSCMenu.categories.Chassis, "DOORS", "Doors", "",true)-- windows
 			AddMod(5,LSCMenu.categories.Chassis,"ROLL CAGE", "Roll cage", "Stiffen your chassis with a rollcage.",true)
 		end
-		
-		LSCMenu.categories:addSubMenu("ENGINE", "Engine",nil, true)
-		AddMod(39, LSCMenu.categories.Engine, "ENGINE BLOCK", "Engine Block", "Custom engine block casings.",true)
-		AddMod(40, LSCMenu.categories.Engine, "CAM COVER", "Cam Cover", "Optional cam covers.",true)
-		AddMod(41, LSCMenu.categories.Engine, "STRUT BRACE", "Strut Brace", "A selection of support struts.",true)
-		AddMod(11,LSCMenu.categories.Engine,"ENGINE TUNES", "Engine Tunes", "Increases horsepower.",true)
-		
+
 		if interior then
 			LSCMenu.categories:addSubMenu("INTERIOR", "Interior","Products for maximum style and comfort.", true)
 			--LSCMenu.categories.Interior:addSubMenu("TRIM", "Trim","A selection of interior designs.", true)
@@ -456,7 +453,20 @@ local function DriveInGarage()
 			AddMod(36, LSCMenu.categories.Interior, "Speakers", "Speakers", "",true)
 			AddMod(37, LSCMenu.categories.Interior, "Trunk", "Trunk", "",true)
 		end
-		
+
+		AddMod(14,LSCMenu.categories,"HORN", "Horn", "Custom air horns.",true)
+		AddMod(4,LSCMenu.categories,"EXHAUST", "Exhausts", "Customized sports exhausts.",true)
+		AddMod(12,LSCMenu.categories,"BRAKES", "Brakes", "Increase stopping power and eliminate brake fade.",true)
+		AddMod(13,LSCMenu.categories,"TRANSMISSION", "Transmission", "Improved acceleration with close ratio transmission.",true)
+		AddMod(15,LSCMenu.categories,"SUSPENSION","Suspension","Upgrade to a sports oriented suspension setup.",true)
+		AddMod(18, LSCMenu.categories, "TURBO", "Turbo", "Reduced lag turbocharger.",false)
+
+		LSCMenu.categories:addSubMenu("ENGINE", "Engine",nil, true)
+		AddMod(39, LSCMenu.categories.Engine, "ENGINE BLOCK", "Engine Block", "Custom engine block casings.",true)
+		AddMod(40, LSCMenu.categories.Engine, "CAM COVER", "Cam Cover", "Optional cam covers.",true)
+		AddMod(41, LSCMenu.categories.Engine, "STRUT BRACE", "Strut Brace", "A selection of support struts.",true)
+		AddMod(11,LSCMenu.categories.Engine,"ENGINE TUNES", "Engine Tunes", "Increases horsepower.",true)
+
 		LSCMenu.categories:addSubMenu("PLATES", "Plates","Decorative identification.", true)
 		LSCMenu.categories.Plates:addSubMenu("LICENSE", "License", "",true)
 		for n, mod in pairs(LSC_Config.prices.plates) do
@@ -469,16 +479,6 @@ local function DriveInGarage()
 		--AddMod(49, LSCMenu.categories, "UNK49", "unk49", "",true)
 		AddMod(38,LSCMenu.categories,"HYDRAULICS","Hydraulics","",true)
 		AddMod(48,LSCMenu.categories,"Liveries", "Liveries", "A selection of decals for your vehicle.",true)
-		
-		if bumper then
-			LSCMenu.categories:addSubMenu("BUMPERS", "Bumpers", "Custom front and rear bumpers.",true)
-			if fbumper then
-				AddMod(1,LSCMenu.categories.Bumpers,"FRONT BUMPERS", "Front bumpers", "Custom front bumpers.",true)
-			end
-			if rbumper then
-				AddMod(2,LSCMenu.categories.Bumpers,"REAR BUMPERS", "Rear bumpers", "Custom rear bumpers.",true)
-			end
-		end
 		
 		local m = LSCMenu.categories:addSubMenu("LIGHTS", "Lights", "Improved night time visibility.",true)
 		AddMod(22,LSCMenu.categories.Lights,"HEADLIGHTS", "Headlights", nil, false)
@@ -570,7 +570,13 @@ local function DriveInGarage()
 						btn.purchased = true
 					end
 				end
-		
+			pearlcol = respray:addSubMenu("PEARLESCENT", "Pearlescent",  nil,true)
+				for n, c in pairs(LSC_Config.prices.pearlescent.colors) do
+					local btn = respray.Pearlescent:addPurchase(c.name,LSC_Config.prices.pearlescent.price)btn.colorindex = c.colorindex
+					if btn.colorindex == myveh.extracolor[1] then
+						btn.purchased = true
+					end
+				end
 		
 		LSCMenu.categories:addSubMenu("WHEELS", "Wheels", "Custom rims, tires and colors.",true)
 			wtype = LSCMenu.categories.Wheels:addSubMenu("WHEEL TYPE", "Wheel type", "Custom rims in all styles and sizes.",true)
@@ -748,8 +754,13 @@ function LSCMenu:onSelectedIndexChanged(name, button)
 			SetVehicleColours(veh,myveh.color[1],button.colorindex)
 			SetVehicleExtraColours(veh, button.colorindex, myveh.extracolor[2])				
 		end
+
+	elseif m == "pearlescent" then
+		SetVehicleExtraColours(veh, button.colorindex, myveh.extracolor[2])
+
 	elseif m == "wheel color" then
 		SetVehicleExtraColours(veh,myveh.extracolor[1], button.colorindex)
+
 	elseif button.modtype and button.mod then
 		if button.modtype ~= 18 and button.modtype ~= 22 then
 			if button.wtype then
@@ -819,6 +830,14 @@ AddEventHandler("LSC:buttonSelected", function(name, button, canpurchase)
 			if button.name == "Stock" or button.purchased or CanPurchase(price, canpurchase)then
 				myveh.extracolor[1] = button.colorindex
 				myveh.color[2] = button.colorindex
+			end
+		end
+	elseif mname == "pearlescent" then
+		if m.parent == "Respray" then
+			if button.name == "Stock" or button.purchased or CanPurchase(price, canpurchase)then
+				--myveh.color[1] = button.colorindex
+				myveh.extracolor[1] = button.colorindex
+				--myveh.color[2] = button.colorindex
 			end
 		end	
 	elseif mname == "liveries" or mname == "hydraulics" or mname == "horn" or mname == "tank" or mname == "ornaments" or  mname == "arch cover" or mname == "aerials" or mname == "roof scoops" or mname == "doors" or mname == "roll cage" or mname == "engine block" or mname == "cam cover" or mname == "strut brace" or mname == "trim design" or mname == "ormnametns" or mname == "dashboard" or mname == "dials" or mname == "seats" or mname == "steering wheels" or mname == "plate holder" or mname == "vanity plates" or mname == "shifter leavers" or mname == "plaques" or mname == "speakers" or mname == "trunk" or mname == "armor" or mname == "suspension" or mname == "transmission" or mname == "brakes" or mname == "engine tunes" or mname == "roof" or mname == "hood" or mname == "grille" or mname == "roll cage" or mname == "exhausts" or mname == "skirts" or mname == "rear bumpers" or mname == "front bumpers" or mname == "spoiler" then
@@ -1082,6 +1101,16 @@ function CheckPurchases(m)
 					if b.purchased ~= nil then b.purchased = true end
 					b.sprite = "garage"
 				end
+			end
+		end
+	elseif name == "pearlescent" then
+		for i,b in pairs(m.buttons) do
+			if b.purchased and b.colorindex ~= myveh.extracolor[1] then
+				if b.purchased ~= nil then b.purchased = false end
+				b.sprite = nil
+			elseif b.purchased == false and b.colorindex == myveh.extracolor[1] then
+				if b.purchased ~= nil then b.purchased = true end
+				b.sprite = "garage"
 			end
 		end
 	elseif name == "armor" or name == "suspension" or name == "transmission" or name == "brakes" or name == "engine tunes" or name == "roof" or name == "fenders" or name == "hood" or name == "grille" or name == "roll cage" or name == "exhausts" or name == "skirts" or name == "rear bumpers" or name == "front bumpers" or name == "spoiler" then
