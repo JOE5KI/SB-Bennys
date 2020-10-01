@@ -918,7 +918,7 @@ AddEventHandler("LSC:buttonSelected", function(name, button, canpurchase)
 				SetVehicleMod(veh,24,myveh.mods[24].mod,false)
 				myveh.mods[24].variation = false
 			end
-		elseif button.name == "Custom Tires" and  (button.purchased or CanPurchase(price, canpurchase)) then
+--[[ 		elseif button.name == "Custom Tires" and  (button.purchased or CanPurchase(price, canpurchase)) then
 			SetVehicleModKit(veh,0)
 			SetVehicleMod(veh,23,myveh.mods[23].mod,true)
 			myveh.mods[23].variation = true
@@ -926,7 +926,7 @@ AddEventHandler("LSC:buttonSelected", function(name, button, canpurchase)
 				SetVehicleModKit(veh,0)
 				SetVehicleMod(veh,24,myveh.mods[24].mod,true)
 				myveh.mods[24].variation = true
-			end
+			end ]]
 		elseif button.name == "Bulletproof Tires" and  (button.purchased or CanPurchase(price, canpurchase)) then
 			if GetVehicleTyresCanBurst(myveh.vehicle) then
 				myveh.bulletProofTyres = false
@@ -1197,12 +1197,12 @@ function CheckPurchases(m)
 				else
 					b.sprite = nil
 				end
-			elseif b.name == "Custom Tires" then
+--[[ 			elseif b.name == "Custom Tires" then
 				if GetVehicleModVariation(myveh.vehicle,23) then
 					b.sprite = "garage"
 				else
 					b.sprite = nil
-				end
+				end ]]
 			elseif b.name == "Bulletproof Tires" then
 				if GetVehicleTyresCanBurst(myveh.vehicle) == false then
 					b.sprite = "garage"
