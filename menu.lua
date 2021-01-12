@@ -18,6 +18,7 @@ function Menu.new(title,header,x,y,width,height,font)
 		maxbuttons = 10,
 		title = title,
 		title_sprite = nil,
+		sprite_dict = 'shopui_title_garagebanners',
 		header = header,
 		name = "main",
 		buttons = {},
@@ -168,9 +169,9 @@ function Menu:Open(name)
 			end
 		end
 		if self.title_sprite then
-			if not HasStreamedTextureDictLoaded(self.title_sprite) then
-				RequestStreamedTextureDict(self.title_sprite)
-				while not HasStreamedTextureDictLoaded(self.title_sprite) do
+			if not HasStreamedTextureDictLoaded(self.sprite_dict) then
+				RequestStreamedTextureDict(self.sprite_dict)
+				while not HasStreamedTextureDictLoaded(self.sprite_dict) do
 					Citizen.Wait(0)
 				end
 			end
@@ -348,7 +349,7 @@ function Menu:draw()
 			--tx = tx - 
 			--Title
 			if self.title_sprite then
-				DrawSprite(self.title_sprite, self.title_sprite, x,  y - 0.039, width, height + 0.08, 0.00,255,255,255,255)
+				DrawSprite(self.sprite_dict, self.title_sprite, x,  y - 0.039, width, height + 0.08, 0.00,255,255,255,255)
 			else
 				drawMenuText(self.title,1,1,tx,ty - height -0.009,scale*2.4,cfg.stext_color.r,cfg.stext_color.g,cfg.stext_color.b,cfg.stext_color.a)
 				DrawRect(x,  y - 0.019, width, height + 0.04,cfg.sbg_color.r,cfg.sbg_color.g,cfg.sbg_color.b,cfg.sbg_color.a)
